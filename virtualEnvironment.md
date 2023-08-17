@@ -27,7 +27,45 @@
      ```bash
      .\venv\Scripts\Activate.ps1
      ```
-   Once activated, your terminal prompt should change to indicate that you are now working within the virtual environment.
+         
+     - To activate a virtual environment in PowerShell, you can follow these steps:
+
+         1. **Open PowerShell as Administrator:**
+            To change the execution policy, you'll need to open PowerShell with administrative privileges. Right-click on the PowerShell icon and select "Run as administrator."
+
+         2. **Change Execution Policy:**
+            In the elevated PowerShell window, you can change the execution policy to allow script execution. However, keep in mind that changing the execution policy can potentially expose your system to security risks. It's recommended to reset the execution policy to its original state after activating your virtual environment.
+
+            Run the following command to temporarily allow script execution:
+
+            ```powershell
+            Set-ExecutionPolicy RemoteSigned
+            ```
+
+            This command allows locally created scripts to run.
+
+         3. **Activate Virtual Environment:**
+            Now you can activate the virtual environment as you did before:
+
+            ```powershell
+            .\venv\Scripts\Activate.ps1
+            ```
+
+         4. **Deactivate Virtual Environment:**
+            After you're done with your work in the virtual environment, deactivate it using:
+
+            ```powershell
+            deactivate
+            ```
+
+         5. **Reset Execution Policy (Optional):**
+            Once you're done working with your virtual environment, it's a good practice to reset the execution policy to its original state for security reasons:
+
+            ```powershell
+            Set-ExecutionPolicy Restricted
+            ```
+
+
 
 5. **Install Packages:**
    With the virtual environment active, you can install Python packages using `pip` as usual. For example:

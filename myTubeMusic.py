@@ -56,7 +56,8 @@ def download_music_with_metadata(url, output_path):
 if __name__ == "__main__":
     url = input("Enter the YouTube URL of the music video: ")
 
-    output_directory = r"C:\Users\petro\Documents\MEGAsync\MyTube" # destination directory for the output
+    #output_directory = r"C:\Users\petro\Documents\MEGAsync\MyTube" # destination directory for the output
+    output_directory = r"C:\Users\p3--\Music\MyTube"
 
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
