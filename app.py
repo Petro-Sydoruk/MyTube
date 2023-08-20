@@ -1,13 +1,12 @@
-#pip install pytube moviepy mutagen pillow
-
-
-import os
-import requests
+from flask import Flask, request, jsonify
 from pytube import YouTube
 from moviepy.editor import AudioFileClip
 from mutagen.id3 import ID3, APIC, TPE1
 from PIL import Image
 from io import BytesIO
+import os
+
+app = Flask(__name__)
 
 def download_music_with_metadata(url, output_path):
     try:
@@ -53,13 +52,20 @@ def download_music_with_metadata(url, output_path):
     except Exception as e:
         print(f"Error: {e}")
 
-if __name__ == "__main__":
-    url = input("Enter the YouTube URL of the music video: ")
+@app.route('/download', methods=['POST'])
+def download_music():
+    try:
+        data = request.json  # Assuming you are sending a JSON object with 'url' and 'output_path'
+        url = data['url']
+        output_path = data['output_path']
 
-    #output_directory = r"C:\Users\petro\Documents\MEGAsync\MyTube" # destination directory for the output
-    output_directory = r"C:\Users\p3--\Music\MyTube"
+        download_music_with_metadata(url, output_path)
 
-    if not os.path.exists(output_directory):
-        os.makedirs(output_directory)
+        response_data = {"success": True, "message": "Downloaded and processed successfully"}
+    except Exception as e:
+        response_data = {"success": False, "message": str(e)}
+    
+    return jsonify(response_data)
 
-    download_music_with_metadata(url, output_directory)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
